@@ -1,0 +1,190 @@
+<div class="page" [class.dark]="isDark()">
+  <header class="nav">
+    <div class="brand">
+      <div class="logo">
+        <img src="/logo.svg" alt="Vox logo" />
+      </div>
+      <div class="title">
+        <span>Vox</span>
+        <small>votações seguras em tempo real</small>
+      </div>
+    </div>
+    <nav class="links">
+      <a href="#features" (click)="scrollTo('features', $event)">Recursos</a>
+      <a href="#how-it-works" (click)="scrollTo('how-it-works', $event)">Como funciona</a>
+      <a href="#faq" (click)="scrollTo('faq', $event)">FAQ</a>
+    </nav>
+    <button class="toggle" (click)="toggleTheme()" [attr.aria-label]="theme() === 'light' ? 'Ativar modo escuro' : 'Ativar modo claro'">
+      <i class="bi" [ngClass]="theme() === 'light' ? 'bi-moon-stars' : 'bi-sun-fill'"></i>
+    </button>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="hero__content">
+        <h1>Votações seguras em tempo real</h1>
+        <p>
+          Crie eleições, gerencie sessões de votação, cadastre candidatos e acompanhe resultados ao
+          vivo com segurança e confiabilidade.
+        </p>
+        <div class="hero__actions">
+          @for (d of downloadLinks; track d.platform) {
+          <a class="btn btn-primary" [href]="d.url" target="_blank" rel="noopener">
+            {{ d.label }}
+          </a>
+          }
+        </div>
+      </div>
+      <div class="hero__qr">
+        @for (d of downloadLinks; track d.platform) {
+        <div class="qr-card">
+          <div class="qr-card__head">
+            <span class="badge-os">{{ d.platform | uppercase }}</span>
+            <span class="badge-type">{{ d.type }}</span>
+          </div>
+          <div class="qr">
+            <img [src]="generateQr(d.url)" [alt]="'QR code para ' + d.label" />
+          </div>
+          <div class="qr-card__foot">
+            <p class="qr-title">{{ d.label }}</p>
+            <p class="qr-sub">{{ d.subtitle }}</p>
+          </div>
+        </div>
+        }
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section muted" id="features">
+      <div class="section__header">
+        <h2>Recursos poderosos</h2>
+        <p>Tudo que você precisa para realizar votações seguras e eficientes</p>
+      </div>
+      <div class="grid four">
+        @for (feature of features; track feature.title) {
+        <div class="card">
+          <div class="icon"><i class="bi" [ngClass]="'bi-' + feature.icon"></i></div>
+          <h3>{{ feature.title }}</h3>
+          <p>{{ feature.description }}</p>
+        </div>
+        }
+      </div>
+    </section>
+
+    <!-- Integration -->
+    <section class="section" id="integrations">
+      <div class="section__header">
+        <h2>Integração e confiança</h2>
+        <p>Infraestrutura robusta com as melhores tecnologias do mercado</p>
+      </div>
+      <div class="grid four narrow">
+        @for (item of stack; track item.title) {
+        <div class="card soft">
+          <div class="icon"><i class="bi" [ngClass]="'bi-' + item.icon"></i></div>
+          <h4>{{ item.title }}</h4>
+          <p class="small">{{ item.description }}</p>
+        </div>
+        }
+      </div>
+      <div class="trust">
+        <div class="trust__badge"><i class="bi bi-shield-lock"></i></div>
+        <h3>Segurança de nível empresarial</h3>
+        <p>
+          Dados e votações protegidos com criptografia, autenticação JWT e infraestrutura redundante
+          em nuvem.
+        </p>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section" id="how-it-works">
+      <div class="section__header">
+        <h2>Como funciona</h2>
+        <p>Processo simples e transparente do início ao fim</p>
+      </div>
+      <div class="steps">
+        @for (step of steps; let i = $index; track step.title) {
+        <div class="step">
+          <div class="step__icon"><i class="bi" [ngClass]="'bi-' + step.icon"></i></div>
+          <div class="step__content">
+            <div class="badge">Passo {{ i + 1 }}</div>
+            <h4>{{ step.title }}</h4>
+            <p>{{ step.description }}</p>
+          </div>
+        </div>
+        }
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section muted" id="faq">
+      <div class="section__header">
+        <h2>Perguntas frequentes</h2>
+        <p>Tire suas dúvidas sobre o Vox</p>
+      </div>
+      <div class="faq">
+        @for (faq of faqs; track faq.question) {
+        <details>
+          <summary>{{ faq.question }}</summary>
+          <div class="answer">
+            <p>{{ faq.answer }}</p>
+          </div>
+        </details>
+        }
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta" id="download">
+      <div class="cta__inner">
+        <div class="cta__icon"><i class="bi bi-download"></i></div>
+        <h2>Comece a usar o Vox hoje</h2>
+        <p>
+          Baixe agora e crie sua primeira eleição em minutos. Segurança, transparência e resultados
+          em tempo real.
+        </p>
+        <div class="hero__actions">
+          @for (d of downloadLinks; track d.platform) {
+          <a class="btn btn-ghost" [href]="d.url" target="_blank" rel="noopener">
+            {{ d.label }}
+          </a>
+          }
+        </div>
+      </div>
+      <div class="stats">
+        @for (item of stats; track item.label) {
+        <div class="stat">
+          <div class="stat__value">{{ item.value }}</div>
+          <p>{{ item.label }}</p>
+        </div>
+        }
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__brand">
+      <div class="logo small">
+        <img src="/logo.svg" alt="Vox logo" />
+      </div>
+      <div>
+        <div class="title-line">Vox</div>
+        <p>Plataforma de votação online segura e em tempo real.</p>
+      </div>
+    </div>
+    <div class="footer__links">
+      <div>
+        <h4>Links rápidos</h4>
+        <a href="#features" (click)="scrollTo('features', $event)">Recursos</a>
+        <a href="#how-it-works" (click)="scrollTo('how-it-works', $event)">Como funciona</a>
+        <a href="#faq" (click)="scrollTo('faq', $event)">FAQ</a>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <a href="mailto:contato@vox.com.br">vox.urna@gmail.com </a>
+      </div>
+    </div>
+    <div class="footer__bottom">© 2025 Vox. Todos os direitos reservados.</div>
+  </footer>
+</div>

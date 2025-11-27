@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Vox</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="logo.svg" />
+    <meta
+      name="description"
+      content="Vox - Votações seguras em tempo real para Android, Windows e Web."
+    />
+    <meta property="og:title" content="Vox | Votações seguras em tempo real" />
+    <meta
+      property="og:description"
+      content="Crie eleições, gerencie sessões e acompanhe resultados ao vivo. Apps para Android e Windows."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://v-o-x.vercel.app/" />
+    <meta property="og:image" content="https://v-o-x.vercel.app/logo.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Vox | Votações seguras em tempo real" />
+    <meta
+      name="twitter:description"
+      content="Crie eleições em minutos, segurança, transparência e resultados ao vivo."
+    />
+    <meta name="twitter:image" content="https://v-o-x.vercel.app/logo.svg" />
+    <script>
+      (function () {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        const theme = prefersDark.matches ? 'dark' : 'light';
+        const applyTheme = () => {
+          document.documentElement.dataset.theme = theme;
+          const body = document.body;
+          if (body) body.dataset.theme = theme;
+        };
+        if (document.readyState == 'loading')
+          document.addEventListener('DOMContentLoaded', applyTheme, { once: true });
+        else applyTheme();
+      })();
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
+</html>
